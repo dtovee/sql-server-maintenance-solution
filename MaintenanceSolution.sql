@@ -23,7 +23,7 @@ USE [master] -- Specify the database in which the objects will be created.
 
 SET NOCOUNT ON
 
-DECLARE @CreateJobs nvarchar(max)          = 'Y'         -- Specify whether jobs should be created.
+DECLARE @CreateJobs nvarchar(max)          = 'N'         -- Specify whether jobs should be created.
 DECLARE @BackupDirectory nvarchar(max)     = NULL        -- Specify the backup root directory. If no directory is specified, the default backup directory is used.
 DECLARE @CleanupTime int                   = NULL        -- Time in hours, after which backup files are deleted. If no time is specified, then no backup files are deleted.
 DECLARE @OutputFileDirectory nvarchar(max) = NULL        -- Specify the output file directory. If no directory is specified, then the SQL Server error log directory is used.
@@ -7955,7 +7955,7 @@ BEGIN
 
           SET @CurrentCommand = @CurrentCommand + ' WHERE objects.[type] IN(''U'',''V'')'
                                                     + CASE WHEN @MSShippedObjects = 'N' THEN ' AND objects.is_ms_shipped = 0' ELSE '' END
-                                                    + ' AND indexes.[type] IN(1,2,3,4,5,6,7)'
+                                                    + ' AND indexes.[type] IN(0,1,2,3,4,5,6,7)'
                                                     + ' AND indexes.is_disabled = 0 AND indexes.is_hypothetical = 0'
         END
 
